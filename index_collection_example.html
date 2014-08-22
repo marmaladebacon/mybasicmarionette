@@ -47,16 +47,37 @@
 </script>
 <!-- using the underscore templating engine below-->
 <script type="text/template" id ="contact-template">
-    <p><%- firstName %> <%- lastName %></p>
+    <%- firstName %> <%- lastName %>
 </script>
 
+<!--
+Notes to self taken from 'Backbone.Marionette.js: A Gentle Introduction'
+What do we need to display a list of model instances:
+1. A collection to hold the models.
+2. A mechanism to render the same view for each model instance
+3. A place to display all these views
+-->
 <script type="text/javascript">
     var ContactManager = new Marionette.Application();
     ContactManager.addRegions({
         mainRegion: "#main-region"
     });
 
+    ContactManager.Contact = Backbone.Model.extend({
+        defaults: {
+            firstName: "NA",
+            lastName: " NA ",
+            phoneNumber: " No phone number"
+        }
+    });
+    //1.
+    ContactManager.ContactCollection = Backbone.Collection.extend({
+       tagName: "ul",
+       model: ContactManager.Contact
+    });
+
     ContactManager.ContactView=Marionette.ItemView.extend({
+        tagName:"li",
         template: "#contact-template",
         events: {
             "click p": "alertPhoneNumber"
@@ -67,28 +88,48 @@
 
     });
 
-    ContactManager.Contact = Backbone.Model.extend({
-            defaults: {
-                firstName: "NA",
-                lastName: " NA ",
-                phoneNumber: " No phone number"
-            }
+
+    // 2.
+    ContactManager.ContactCollectionView = Marionette.CollectionView.extend({
+       tagName: "ul",
+       childView: ContactManager.ContactView
+    });
+
+
+    ContactManager.ContactCollection = Backbone.Collection.extend({
+       model: ContactManager.Contact
     });
 
     ContactManager.on('start', function(){
 
-        var aleph = new ContactManager.Contact({
-           firstName: "Aleph",
-           lastName: "Gray"
+        var contacts = new ContactManager.ContactCollection([
+            {
+                firstName: "Matt",
+                lastName: " Ko ",
+                phoneNumber: " 4567-21314 "
+            },
+            {
+                firstName: "Bob",
+                lastName: " Sagett ",
+                phoneNumber: " 45223-314 "
+            },
+            {
+                firstName: "Vana",
+                lastName: " Volt ",
+                phoneNumber: " 65223-314 "
+            }
 
+        ]);
+
+        var contactsListView = new ContactManager.ContactCollectionView({
+            collection: contacts
         });
 
-        var alephView = new ContactManager.ContactView({
-            model: aleph
-        });
 
-        ContactManager.mainRegion.show(alephView);
+        ContactManager.mainRegion.show(contactsListView);
         console.log("Contact manager has started 1");
+
+
     });
     ContactManager.start();
     console.log("Contact manager has started 2");

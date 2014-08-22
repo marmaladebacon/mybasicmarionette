@@ -1,13 +1,14 @@
 mybasicmarionette setup
 =================
 
-Teaching myself marionette from the ground up, including the use of npm and bower in setting up the initial project
+Teaching myself marionette from the ground up, including the use of npm and bower in setting up the initial project.
+
 Note 1: npm and bower are not included in the "A gentle introduction to Marionette" book, and are included in this readme
  for reference.
 Note 2: While the directory structure used in this project is not meant to be the only structure used, it is meant to be
   the easiest to get started without modifying the package managers defaults and still provide a clean template to start
   with.
-
+Note 3: I'll be using the default underscore.js templating as opposed to handlebars templating.
 * First steps
   * Configure your manifest file package.json (manually like i did, or use npm init) to enable the use of npm.
     * note the difference between a JavaScript object literal and JSON

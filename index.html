@@ -43,7 +43,9 @@
   </body>
 
 <script type="text/template" id="static-template">
-    <a href="index_static_example.html">Static views example</a>
+    <li><a href="index_static_example.html">Static views example</a></li>
+    <li><a href="index_model_example.html">Model example</a></li>
+    <li><a href="index_collection_example.html">Collection example</a></li>
 </script>
 
 <script type="text/javascript">
@@ -61,13 +63,12 @@
 
     ContactManager.on('start', function(){
         var staticView = new ContactManager.StaticView({
+            tagName: "ul",
             template: "#static-template"
         });
 
         ContactManager.mainRegion.show(staticView);
-        console.log("Contact manager has started 1");
     });
     ContactManager.start();
-    console.log("Contact manager has started 2");
 </script>
 </html>
