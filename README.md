@@ -1,8 +1,10 @@
-mybasicmarionette
+mybasicmarionette setup
 =================
 
-Teaching myself marionette from the ground up.
-Note: While the directory structure used in this project is not meant to be the only structure used, it is meant to be
+Teaching myself marionette from the ground up, including the use of npm and bower in setting up the initial project
+Note 1: npm and bower are not included in the "A gentle introduction to Marionette" book, and are included in this readme
+ for reference.
+Note 2: While the directory structure used in this project is not meant to be the only structure used, it is meant to be
   the easiest to get started without modifying the package managers defaults and still provide a clean template to start
   with.
 
@@ -10,8 +12,8 @@ Note: While the directory structure used in this project is not meant to be the 
   * Configure your manifest file package.json (manually like i did, or use npm init) to enable the use of npm.
     * note the difference between a JavaScript object literal and JSON
       * eg
-        { "keyA": "2", "keyB": "twenty-five"} vs
-        {keyA: 2, keyB: "twenty-five"}
+        { "keyA": "2", "keyB": "twenty-five" } vs
+        { keyA: 2, keyB: "twenty-five" }
         and json can't have functions assigned to them.
     * See https://www.npmjs.org/doc/files/package.json.html for more information
     * Ensure you have grunt and bower included
@@ -63,4 +65,9 @@ Note: While the directory structure used in this project is not meant to be the 
      called bower_components
     *
   * Set up grunt
-    * see the included Gruntfile example, which was taken from
+    * see the included Gruntfile example, which was taken from http://gruntjs.com/getting-started and edited for this
+    example
+  * (Optional) if you are using Git, be sure to include in the .gitignore file the following
+    * bower_components
+    * node_modules
+    * any IDE specific files ie, PHPStorm has a .idea directory which should be ignored as well.

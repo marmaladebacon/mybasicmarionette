@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Contact Manager</title>
+
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="src/stylesheets/application.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="navbar-inner">
+        <div class="container">
+            <span class="brand">Contact Manager</span>
+        </div>
+    </div>
+</div>
+<div>
+    <h3>Example of a static view</h3>
+    <div id="main-region" class="container">
+        <p>Text to be replaced 1</p>
+    </div>
+    <h3>Example of a static view that was dynamically extended at runtime to be a list</h3>
+    <div id="secondary-region" class="container">
+        <p>Text to be replaced 2</p>
+    </div>
+    <h3>Example of a static view with a constructor that was created outside of the ContactManager object</h3>
+    <div id="tertiary-region" class="container">
+        <p>Text to be replaced 3</p>
+    </div>
+</div>
+<div class="container">
+    <p>Static content of the webpage</p>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/json2/json2.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/marionette/lib/backbone.marionette.js"></script>
+</body>
+
+
+<script type="text/template" id="static-template">
+    <p>Text rendered by our Marionette app </p>
+</script>
+
+<script type="text/template" id="static-template2">
+    <li>This will be replaced at runtime with another template</li>
+    <li>This will be replaced at runtime with another template</li>
+</script>
+
+<script type="text/template" id="static-template3">
+    <p>Static view 3</p>
+</script>
+<script type="text/template" id="list-item-template">
+    <li>One Item</li>
+    <li>Two Items</li>
+</script>
+
+<script type="text/javascript">
+    var ContactManager = new Marionette.Application();
+
+    ContactManager.addRegions({
+        mainRegion: "#main-region",
+        secondaryRegion: "#secondary-region",
+        tertiaryRegion: "#tertiary-region"
+    });
+
+    ContactManager.StaticView = Marionette.ItemView.extend({
+        id: "static-view",
+        tagName: "span",
+        template: "#static-template"
+    });
+
+    ContactManager.StaticView2 = Marionette.ItemView.extend({
+        id: "static2",
+        tagName: "ul",
+        template: "#list-item-template"
+    });
+
+    var StaticView3 = Marionette.ItemView.extend({
+        id: "static3",
+        tagName: "span",
+        className: "brand",
+        template: "#static-template3"
+    });
+
+
+    ContactManager.on('start', function(){
+        var staticView = new ContactManager.StaticView();
+        var staticView2 = new ContactManager.StaticView2({
+            tagName: "ul",
+            template: "#list-item-template"
+        });
+        var staticView3 = new StaticView3();
+
+        ContactManager.mainRegion.show(staticView);
+        ContactManager.secondaryRegion.show(staticView2);
+        ContactManager.tertiaryRegion.show(staticView3);
+        console.log("Contact manager has started 1");
+    });
+    ContactManager.start();
+    console.log("Contact manager has started 2");
+</script>
+</html>
