@@ -43,7 +43,7 @@ Note 3: I'll be using the default underscore.js templating as opposed to handleb
       version: '0.1.0',
       homepage: 'https://github.com/zaeni/mybasicmarionette',
       authors: [
-        'mko <zaeni.redmage@gmail.com>'
+        'mko'
       ],
       description: 'My Basic Marionette Template',
       license: 'MIT',
