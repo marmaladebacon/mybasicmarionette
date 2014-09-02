@@ -50,14 +50,14 @@ ContactManager.module("Entities", function(Entities, ContactManager, Backbone, M
      contacts = new Entities.ContactCollection(
         [{
             id:1,
-            firstName: "Test",
-            lastName: " Test ",
+            firstName: "Catty",
+            lastName: " TestSurname ",
             phoneNumber: " 4567-21314 "
         },
         {
             id:2,
-            firstName: "Test2",
-            lastName: " Test2 ",
+            firstName: "Abe",
+            lastName: " BestSurname ",
             phoneNumber: " 45223-314 "
         }]
      );

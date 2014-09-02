@@ -27,8 +27,19 @@
 </div>
 
 <h1>Examples:</h1>
+<h3>Modular example 1, Composite view with table</h3>
 <div id="main-region" class="container">
-    <p>Text to be replaced 1</p>
+    <p>Main region 1</p>
+</div>
+
+<h3>Modular example 2, Composite view with list</h3>
+<div id="main-region2" class="container">
+    <p>Main region 2</p>
+</div>
+
+<h3>Buttons example</h3>
+<div id="main-region3" class="container">
+    <p>Main region 3</p>
 </div>
 
 
@@ -41,54 +52,40 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/marionette/lib/backbone.marionette.js"></script>
 </body>
+
+
+<script type="text/template" id="contact-list">
+    <thead>
+        <tr><th>First Name</th><th>Last Name</th></tr>
+    </thead>
+    <tbody>
+    </tbody>
+</script>
+<script type="text/template" id="contact-list-available">
+    <p>List of contacts available:</p>
+    <ul>
+    </ul>
+</script>
+<script type="text/template" id="contact-list-available-item">
+    <%- firstName %> <%- lastName %>
+</script>
+<script type="text/template" id ="contact-list-item">
+    <td><%- firstName %> <%- lastName %></td>
+</script>
+<script type="text/template" id="contact-list-item-button">
+    <td><%- firstName %></td><td><%- lastName %></td>
+    <td><button class="btn btn-small"><i class="icon-remove">Delete</i></button></td>
+</script>
+<script type="text/template" id="contact-list-buttons">
+    <thead><tr><th>First Name</th><th>Last Name</th><th>Actions</th></tr></thead>
+    <tbody></tbody>
+</script>
+
 <script src="./src/js/app.js"></script>
 <script src="./src/js/entities/contactinfo.js"></script>
-
-<script type="text/template" id="static-template">
-    <a href="index_static_example.html">Static views example</a>
-</script>
-<!-- using the underscore templating engine below-->
-<script type="text/template" id ="contact-template">
-    <div><%- firstName %> <%- lastName %></div>
-</script>
-
-
+<script src="./src/js/apps/contacts/list/list_view.js"></script>
+<script src="./src/js/apps/contacts/list/list_controller.js"></script>
 <script type="text/javascript">
-
-    ContactManager.ContactView=Marionette.ItemView.extend({
-        tagName:"li",
-        template: "#contact-template",
-        events: {
-            "click div": "alertPhoneNumber"
-        },
-        alertPhoneNumber: function(){
-            alert(this.model.escape("phoneNumber"));
-        }
-
-    });
-
-
-    // 2.
-    ContactManager.ContactCollectionView = Marionette.CollectionView.extend({
-        tagName: "ul",
-        childView: ContactManager.ContactView
-    });
-
-    ContactManager.on('start', function(){
-
-        var contacts = ContactManager . request ( "contact:entities" );
-
-        //4.Simply pass the collection as an option when we instantiate the collection view
-        var contactsListView = new ContactManager.ContactCollectionView({
-            collection: contacts
-        });
-
-        //3.
-        ContactManager.mainRegion.show(contactsListView);
-        console.log("Contact manager has started 1");
-
-
-    });
     ContactManager.start();
     console.log("Contact manager has started 2");
 </script>
